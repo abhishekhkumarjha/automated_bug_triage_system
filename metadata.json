@@ -1,0 +1,5 @@
+{
+  "name": "BugTriage AI",
+  "description": "Automated Bug Triage System with AI-powered prediction and dashboard.",
+  "requestFramePermissions": []
+}
