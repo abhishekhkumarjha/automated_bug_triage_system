@@ -114,8 +114,20 @@ class BugTriageModel:
         return vectorizer, vectorizer.fit_transform(texts)
 
     def _load_repo_dataset(self):
-        filepath = os.path.join(_repo_root(), "data", "bug_reports.csv")
-        df = pd.read_csv(filepath)
+        # Try to load enhanced dataset first, fall back to original
+        enhanced_filepath = os.path.join(_repo_root(), "data", "enhanced_bug_reports.csv")
+        original_filepath = os.path.join(_repo_root(), "data", "bug_reports.csv")
+
+        if os.path.exists(enhanced_filepath):
+            print(f"Loading enhanced dataset from {enhanced_filepath}")
+            df = pd.read_csv(enhanced_filepath)
+        elif os.path.exists(original_filepath):
+            print(f"Loading original dataset from {original_filepath}")
+            df = pd.read_csv(original_filepath)
+        else:
+            print("No dataset found!")
+            return pd.DataFrame()
+
         return self._canonicalize_frame(
             df,
             title_col="title",

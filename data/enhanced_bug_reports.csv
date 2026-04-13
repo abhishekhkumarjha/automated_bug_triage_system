@@ -1,0 +1,91 @@
+title,description,assigned_to,priority
+Email notifications not sending,Users are experiencing email notifications not sending. This is impacting system reliability.,backend_team,high
+Email notification not sent,Users are not receiving email notifications for account activities.,backend_team,medium
+Hover effects not working on links,The hover effects not working on links. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Text alignment broken in footer,The text alignment broken in footer. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Login button not working,User cannot click the login button on the homepage. It appears grayed out.,frontend_team,high
+In-app purchase failing,Mobile users report that in-app purchase failing. This affects app usability.,mobile_team,medium
+Font size too small on mobile devices,The font size too small on mobile devices. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Authentication failing for new users,Users are experiencing authentication failing for new users. This is impacting system reliability.,backend_team,medium
+Data validation error,Form submissions are accepted even with invalid email formats.,backend_team,high
+Database connection timeout during checkout,Users are experiencing database connection timeout during checkout. This is impacting system reliability.,backend_team,medium
+Button not clickable on dashboard,The button not clickable on dashboard. This is affecting user experience and needs immediate attention.,frontend_team,medium
+GPS location accuracy issues,Mobile users report that gps location accuracy issues. This affects app usability.,mobile_team,low
+Responsive design issue on tablet,The responsive design issue on tablet. This is affecting user experience and needs immediate attention.,frontend_team,low
+Image not loading on profile page,The image not loading on profile page. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Color contrast issue,Text color does not meet accessibility standards for color contrast.,frontend_team,low
+Memory leak in image processing,The image processing module is causing memory leaks after multiple uploads.,backend_team,medium
+App store rejection,The app was rejected from the app store due to guideline violations.,mobile_team,high
+Background job processing stuck,Users are experiencing background job processing stuck. This is impacting system reliability.,backend_team,low
+Responsive design issue on iPhone,The responsive design issue on iphone. This is affecting user experience and needs immediate attention.,frontend_team,low
+Image not loading on homepage,The image not loading on homepage. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Responsive design issue on desktop,The responsive design issue on desktop. This is affecting user experience and needs immediate attention.,frontend_team,low
+Color scheme inconsistent across pages,The color scheme inconsistent across pages. This is affecting user experience and needs immediate attention.,frontend_team,medium
+App crashing on tablet when scrolling,Mobile users report that app crashing on tablet when scrolling. This affects app usability.,mobile_team,medium
+Data not saving to database,Users are experiencing data not saving to database. This is impacting system reliability.,backend_team,low
+API endpoint returning 404 error,Users are experiencing api endpoint returning 404 error. This is impacting system reliability.,backend_team,medium
+Search functionality slow,The search feature takes more than 10 seconds to return results.,backend_team,medium
+Server response time over 30 seconds,Users are experiencing server response time over 30 seconds. This is impacting system reliability.,backend_team,high
+Button not clickable on login page,The button not clickable on login page. This is affecting user experience and needs immediate attention.,frontend_team,low
+API endpoint returning 500 error,Users are experiencing api endpoint returning 500 error. This is impacting system reliability.,backend_team,medium
+Database connection timeout during login,Users are experiencing database connection timeout during login. This is impacting system reliability.,backend_team,low
+Broken link in footer,The contact link in the footer redirects to a 404 page.,frontend_team,low
+Memory leak in header,Users are experiencing memory leak in header. This is impacting system reliability.,backend_team,medium
+CSS styling broken,The CSS styles are not loading properly in Firefox browser.,frontend_team,low
+App crashing on desktop when tapping,Mobile users report that app crashing on desktop when tapping. This affects app usability.,mobile_team,medium
+Memory leak in footer,Users are experiencing memory leak in footer. This is impacting system reliability.,backend_team,medium
+Mobile app crash,The mobile app crashes when users try to access the settings page.,mobile_team,high
+App not compatible with Android 13,Mobile users report that app not compatible with android 13. This affects app usability.,mobile_team,low
+API endpoint returning 403 error,Users are experiencing api endpoint returning 403 error. This is impacting system reliability.,backend_team,low
+Responsive design fix,The website layout breaks on tablets with screen width between 768px and 1024px.,frontend_team,medium
+App crashing on Android phone when scrolling,Mobile users report that app crashing on android phone when scrolling. This affects app usability.,mobile_team,medium
+CSS styling not loading in Chrome,The css styling not loading in chrome. This is affecting user experience and needs immediate attention.,frontend_team,low
+Offline mode not working,The app does not function properly in offline mode.,mobile_team,medium
+App not compatible with iOS 16,Mobile users report that app not compatible with ios 16. This affects app usability.,mobile_team,low
+Navigation menu not displaying correctly,The navigation menu not displaying correctly. This is affecting user experience and needs immediate attention.,frontend_team,high
+Battery drain faster than expected,Mobile users report that battery drain faster than expected. This affects app usability.,mobile_team,low
+Session timeout,"User sessions expire too quickly, causing frequent logouts.",backend_team,medium
+Form validation not working for username,The form validation not working for username. This is affecting user experience and needs immediate attention.,frontend_team,medium
+API endpoint returning 500,The /api/users endpoint is returning a 500 internal server error intermittently.,backend_team,high
+Push notification delay,Push notifications are delayed by several minutes.,mobile_team,medium
+Database connection timeout during registration,Users are experiencing database connection timeout during registration. This is impacting system reliability.,backend_team,high
+Performance optimization,The page load time is over 5 seconds on average.,backend_team,medium
+Form validation not working for password,The form validation not working for password. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Authentication failure,Users are unable to authenticate using OAuth providers.,backend_team,high
+Memory leak in dropdown,Users are experiencing memory leak in dropdown. This is impacting system reliability.,backend_team,high
+Authentication failing for admin users,Users are experiencing authentication failing for admin users. This is impacting system reliability.,backend_team,medium
+CSS styling not loading in Edge,The css styling not loading in edge. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Image not loading on login page,The image not loading on login page. This is affecting user experience and needs immediate attention.,frontend_team,low
+CSS styling not loading in Safari,The css styling not loading in safari. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Memory leak in sidebar,Users are experiencing memory leak in sidebar. This is impacting system reliability.,backend_team,medium
+Touch gestures not responding,Mobile users report that touch gestures not responding. This affects app usability.,mobile_team,high
+CSS styling not loading in Firefox,The css styling not loading in firefox. This is affecting user experience and needs immediate attention.,frontend_team,high
+Button not clickable on homepage,The button not clickable on homepage. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Text alignment broken in sidebar,The text alignment broken in sidebar. This is affecting user experience and needs immediate attention.,frontend_team,medium
+API rate limiting,"The API is not properly rate limiting requests, leading to abuse.",backend_team,high
+Server response time over 15 seconds,Users are experiencing server response time over 15 seconds. This is impacting system reliability.,backend_team,high
+File upload failing with large files,Users are experiencing file upload failing with large files. This is impacting system reliability.,backend_team,low
+Button not clickable on settings,The button not clickable on settings. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Server response time over 5 seconds,Users are experiencing server response time over 5 seconds. This is impacting system reliability.,backend_team,low
+Text alignment broken in header,The text alignment broken in header. This is affecting user experience and needs immediate attention.,frontend_team,low
+Push notifications not received,Mobile users report that push notifications not received. This affects app usability.,mobile_team,low
+Cache invalidation not working,Users are experiencing cache invalidation not working. This is impacting system reliability.,backend_team,medium
+Responsive design issue on Android phone,The responsive design issue on android phone. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Image not loading on dashboard,The image not loading on dashboard. This is affecting user experience and needs immediate attention.,frontend_team,medium
+API endpoint returning 502 error,Users are experiencing api endpoint returning 502 error. This is impacting system reliability.,backend_team,low
+App crashing on tablet when closing,Mobile users report that app crashing on tablet when closing. This affects app usability.,mobile_team,high
+Text alignment broken in modal,The text alignment broken in modal. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Hover effects not working on images,The hover effects not working on images. This is affecting user experience and needs immediate attention.,frontend_team,low
+Database connection timeout,The application throws a timeout error when connecting to the database during peak hours.,backend_team,medium
+Network connectivity problems,Mobile users report that network connectivity problems. This affects app usability.,mobile_team,low
+Payment gateway error,Payments are failing with error code 400 from the gateway.,backend_team,high
+UI alignment issue,The text in the navigation bar is misaligned on mobile devices.,frontend_team,low
+File download corrupted,Downloaded files are corrupted and cannot be opened.,backend_team,low
+Form validation not working for email,The form validation not working for email. This is affecting user experience and needs immediate attention.,frontend_team,medium
+Authentication failing for regular users,Users are experiencing authentication failing for regular users. This is impacting system reliability.,backend_team,high
+App crashing on iPhone when closing,Mobile users report that app crashing on iphone when closing. This affects app usability.,mobile_team,medium
+GPS location inaccurate,The GPS location tracking is inaccurate on Android devices.,mobile_team,low
+Screen rotation causing layout issues,Mobile users report that screen rotation causing layout issues. This affects app usability.,mobile_team,medium
+App crashing on tablet when opening,Mobile users report that app crashing on tablet when opening. This affects app usability.,mobile_team,high
+Image upload failure,Users cannot upload images larger than 2MB.,frontend_team,medium
+App not compatible with Android 12,Mobile users report that app not compatible with android 12. This affects app usability.,mobile_team,medium
