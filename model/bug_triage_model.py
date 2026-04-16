@@ -4,26 +4,31 @@ import re
 import zipfile
 
 import joblib
-import nltk
 import pandas as pd
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 
-def _ensure_nltk_resource(resource_path, download_name):
-    try:
-        nltk.data.find(resource_path)
-        return True
-    except LookupError:
-        return False
-
-
-PUNKT_AVAILABLE = _ensure_nltk_resource("tokenizers/punkt", "punkt")
-STOPWORDS_AVAILABLE = _ensure_nltk_resource("corpora/stopwords", "stopwords")
+# Common English stopwords - built-in fallback to avoid NLTK download
+COMMON_STOPWORDS = {
+    'a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', 'and', 'any', 'are', "aren't", 
+    'as', 'at', 'be', 'because', 'been', 'before', 'being', 'below', 'between', 'both', 'but', 'by', 'can', 
+    "can't", 'cannot', 'could', "couldn't", 'did', "didn't", 'do', 'does', "doesn't", 'doing', "don't", 'down', 
+    'during', 'each', 'few', 'for', 'from', 'further', 'had', "hadn't", 'has', "hasn't", 'have', "haven't", 
+    'having', 'he', "he'd", "he'll", "he's", 'her', 'here', "here's", 'hers', 'herself', 'him', 'himself', 
+    'his', 'how', "how's", 'i', "i'd", "i'll", "i'm", "i've", 'if', 'in', 'into', 'is', "isn't", 'it', "it's", 
+    'its', 'itself', 'just', 'k', 'me', "me're", 'might', 'more', 'most', "mustn't", 'my', 'myself', 'no', 'nor', 
+    'not', 'of', 'off', 'on', 'once', 'only', 'or', 'other', 'our', 'ours', 'ourselves', 'out', 'over', 'own', 
+    'same', "shan't", 'she', "she'd", "she'll", "she's", 'should', "shouldn't", 'so', 'some', 'such', 'than', 
+    'that', "that's", 'the', 'their', 'theirs', 'them', 'themselves', 'then', 'there', "there's", 'these', 'they', 
+    "they'd", "they'll", "they're", "they've", 'this', 'those', 'through', 'to', 'too', 'under', "shan't", 'until', 
+    'up', 'very', 'was', "wasn't", 'we', "we'd", "we'll", "we're", "we've", 'were', "weren't", 'what', "what's", 
+    'when', "when's", 'where', "where's", 'which', 'while', 'who', "who's", 'whom', 'why', "why's", 'will', "won't", 
+    'with', "won't", 'would', "wouldn't", 'you', "you'd", "you'll", "you're", "you've", 'your', 'yours', 'yourself', 
+    'yourselves'
+}
 
 
 def _repo_root():
@@ -36,7 +41,7 @@ class BugTriageModel:
         self.priority_vectorizer = None
         self.classifier = None
         self.priority_classifier = None
-        self.stop_words = set(stopwords.words("english")) if STOPWORDS_AVAILABLE else set()
+        self.stop_words = COMMON_STOPWORDS
 
     def preprocess_text(self, text):
         """
@@ -49,11 +54,9 @@ class BugTriageModel:
         text = "" if pd.isna(text) else str(text)
         text = text.lower()
         text = re.sub(r"[^a-zA-Z\s]", " ", text)
-        if PUNKT_AVAILABLE:
-            tokens = word_tokenize(text)
-        else:
-            tokens = text.split()
-        tokens = [word for word in tokens if word not in self.stop_words]
+        # Simple split tokenization instead of NLTK
+        tokens = text.split()
+        tokens = [word for word in tokens if word not in self.stop_words and len(word) > 0]
         return " ".join(tokens)
 
     def _canonicalize_frame(self, df, title_col, description_col, assigned_col=None, priority_col=None):

@@ -24,12 +24,18 @@ bug_triage/
 ├── data/
 │   └── bug_reports.csv  # Sample dataset
 ├── scripts/             # Additional scripts (if needed)
+├── deploy.sh            # Automated deployment script
+├── docker-compose.yml   # Docker service orchestration
+├── Dockerfile           # Multi-stage Docker build
+├── .env.example         # Environment variable example
 ├── main.py              # Main entry point
 ├── requirements.txt     # Python dependencies
 └── README.md           # This file
 ```
 
 ## Installation
+
+### Option 1: Local Development
 
 1. Clone or download the project
 2. Navigate to the project directory
@@ -39,7 +45,26 @@ bug_triage/
 python main.py install
 ```
 
+### Option 2: Docker Deployment (Recommended)
+
+1. Clone the repository
+2. Navigate to the project directory
+3. Run the deployment script:
+
+```bash
+chmod +x deploy.sh
+./deploy.sh
+```
+
+Or manually:
+
+```bash
+docker-compose up -d
+```
+
 ## Setup
+
+### Local Development
 
 1. Create the database tables:
 
@@ -53,15 +78,78 @@ python main.py db
 python main.py train
 ```
 
-## Running the Application
-
-Start the FastAPI server:
+3. Start the FastAPI server:
 
 ```bash
 python main.py run
 ```
 
+### Docker Deployment
+
+The deployment script handles all setup automatically. The API will be available at `http://localhost:8000`
+
+## Running the Application
+
 The API will be available at `http://localhost:8000`
+
+### Available Endpoints
+
+- `GET /health` - Health check
+- `GET /docs` - Interactive API documentation (Swagger UI)
+- `POST /predict` - Predict bug assignment and priority
+- `GET /reports` - View all bug reports
+- `POST /retrain` - Retrain the model with new data
+
+## Deployment
+
+### Docker Deployment
+
+The application includes Docker configuration for easy deployment:
+
+- **Dockerfile**: Multi-stage build for production
+- **docker-compose.yml**: Complete service orchestration
+- **deploy.sh**: Automated deployment script
+
+### Environment Variables
+
+Copy `.env.example` to `.env` and configure:
+
+```bash
+cp .env.example .env
+```
+
+Key environment variables:
+- `DATABASE_URL`: Database connection string
+- `HOST`: Server host (default: 0.0.0.0)
+- `PORT`: Server port (default: 8000)
+- `MODEL_PATH`: Path to trained model file
+
+### Production Deployment
+
+For production deployment:
+
+1. Use PostgreSQL instead of SQLite
+2. Configure proper logging
+3. Set up reverse proxy (nginx)
+4. Enable HTTPS
+5. Configure monitoring
+
+Example with PostgreSQL:
+
+```yaml
+# docker-compose.yml
+services:
+  bug-triage-api:
+    environment:
+      - DATABASE_URL=postgresql://user:password@postgres:5432/bug_triage
+  
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: bug_triage
+      POSTGRES_USER: bug_triage_user
+      POSTGRES_PASSWORD: your_password
+```
 
 ## API Endpoints
 

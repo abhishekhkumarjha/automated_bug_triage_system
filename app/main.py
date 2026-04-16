@@ -2,12 +2,17 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 import os
 import sys
+import logging
 
 import pandas as pd
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Add the parent directory to the path to import the model
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -18,14 +23,31 @@ from model.bug_triage_model import BugTriageModel
 ROOT_DIR = Path(__file__).resolve().parent.parent
 MODEL_PATH = ROOT_DIR / "model" / "bug_triage_model.pkl"
 
-model = BugTriageModel()
+# Lazy-loaded model
+_model = None
+
+def get_model():
+    """Lazy load model on first use"""
+    global _model
+    if _model is None:
+        logger.info("Initializing model...")
+        _model = BugTriageModel()
+        if MODEL_PATH.exists():
+            logger.info(f"Loading model from {MODEL_PATH}")
+            _model.load_model(str(MODEL_PATH))
+        else:
+            logger.warning(f"Model file not found at {MODEL_PATH}")
+    return _model
 
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
+    logger.info("Starting up...")
     create_tables()
-    model.load_model(str(MODEL_PATH))
+    # Don't load model on startup - it will be loaded on first request
+    logger.info("Startup complete")
     yield
+    logger.info("Shutting down...")
 
 
 app = FastAPI(
@@ -82,6 +104,7 @@ async def predict_bug_assignment(
     db: Session = Depends(get_db),
 ):
     try:
+        model = get_model()
         prediction = model.predict(request.title, request.description)
 
         existing_reports = db.query(BugReport).all()

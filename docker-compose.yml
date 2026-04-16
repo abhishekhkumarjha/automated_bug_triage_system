@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  bug-triage-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./bug_triage.db
+      - HOST=0.0.0.0
+      - PORT=8000
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./model:/app/model
+      - ./data:/app/data
+      - ./bug_triage.db:/app/bug_triage.db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Add a database service for production
+  # postgres:
+  #   image: postgres:15
+  #   environment:
+  #     POSTGRES_DB: bug_triage
+  #     POSTGRES_USER: bug_triage_user
+  #     POSTGRES_PASSWORD: bug_triage_password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+
+# volumes:
+#   postgres_data:
