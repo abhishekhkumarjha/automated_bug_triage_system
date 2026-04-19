@@ -1,0 +1,17 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "python start_railway.py"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+healthcheckPath = "/health"
+healthcheckPort = 8000
+healthcheckTimeout = 100
+healthcheckInterval = 10
+
+[[deploy.healthchecks]]
+path = "/health"
+port = 8000
+timeout = 100
+interval = 10
