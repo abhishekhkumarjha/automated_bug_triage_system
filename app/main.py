@@ -23,6 +23,22 @@ from model.bug_triage_model import BugTriageModel
 ROOT_DIR = Path(__file__).resolve().parent.parent
 MODEL_PATH = ROOT_DIR / "model" / "bug_triage_model.pkl"
 
+
+def get_allowed_origins() -> list[str]:
+    allowed_origins = os.getenv(
+        "ALLOWED_ORIGINS",
+        ",".join(
+            [
+                "http://localhost:3000",
+                "http://127.0.0.1:3000",
+                "http://localhost:5173",
+                "http://127.0.0.1:5173",
+                "https://automated-bug-triage-system.up.railway.app",
+            ]
+        ),
+    )
+    return [origin.strip() for origin in allowed_origins.split(",") if origin.strip()]
+
 # Lazy-loaded model
 _model = None
 
@@ -58,13 +74,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "https://automated-bug-triage-system.up.railway.app",
-    ],
+    allow_origins=get_allowed_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -195,6 +205,7 @@ async def get_bug_history(skip: int = 0, limit: int = 50, db: Session = Depends(
 @app.post("/retrain")
 async def retrain_model(db: Session = Depends(get_db)):
     try:
+        model = get_model()
         reports = db.query(BugReport).all()
 
         if len(reports) < 10:
@@ -228,4 +239,6 @@ async def retrain_model(db: Session = Depends(get_db)):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    host = os.getenv("HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", "8000"))
+    uvicorn.run(app, host=host, port=port)

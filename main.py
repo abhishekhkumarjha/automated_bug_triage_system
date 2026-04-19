@@ -27,7 +27,22 @@ def run_server():
     """
     print("Starting the FastAPI server...")
     try:
-        subprocess.run([sys.executable, "-m", "uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"], check=True)
+        host = os.getenv("HOST", "0.0.0.0")
+        port = os.getenv("PORT", "8000")
+        reload_enabled = os.getenv("RELOAD", "false").lower() == "true"
+        command = [
+            sys.executable,
+            "-m",
+            "uvicorn",
+            "app.main:app",
+            "--host",
+            host,
+            "--port",
+            port,
+        ]
+        if reload_enabled:
+            command.append("--reload")
+        subprocess.run(command, check=True)
     except subprocess.CalledProcessError as e:
         print(f"Server failed to start: {e}")
         sys.exit(1)
